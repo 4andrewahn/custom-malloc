@@ -18,6 +18,8 @@ typedef struct _metadata_t {
 void *startOfHeap = NULL;
 void *free_head = NULL; 
 
+
+// Helper function to print current heap
 void printHeap() {
   metadata_t *curMeta = startOfHeap;
   void *endOfHeap = sbrk(0);
@@ -29,6 +31,7 @@ void printHeap() {
   printf("-- End of Heap (%p) --\n\n", endOfHeap);
 }
 
+// Helper function to print current free list
 void printFreeList() {
   printf("Free List: "); 
   metadata_t *cur = free_head; 
@@ -59,8 +62,6 @@ void printFreeList() {
  *
  *    If the function failed to allocate the requested block of memory, a
  *    NULL pointer is returned.
- *
- * @see http://www.cplusplus.com/reference/clibrary/cstdlib/calloc/
  */
 void *calloc(size_t num, size_t size) {
   if (LOG_CALL) printf("in calloc()\n");
@@ -92,8 +93,6 @@ void *calloc(size_t num, size_t size) {
  *
  *    If the function failed to allocate the requested block of memory,
  *    a null pointer is returned.
- *
- * @see http://www.cplusplus.com/reference/clibrary/cstdlib/malloc/
  */
 void *malloc(size_t size) {
   if (!startOfHeap) { startOfHeap = sbrk(0); }
@@ -271,8 +270,6 @@ void free(void *ptr) {
  *    If the function failed to allocate the requested block of memory,
  *    a NULL pointer is returned, and the memory block pointed to by
  *    argument ptr is left unchanged.
- *
- * @see http://www.cplusplus.com/reference/clibrary/cstdlib/realloc/
  */
 void *realloc(void *ptr, size_t size) {
   if (LOG_CALL) printf("in realloc()\n"); 
